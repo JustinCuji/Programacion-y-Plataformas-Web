@@ -1,5 +1,4 @@
-
-name: Publicar Practica01 en GitHub Pages
+name: Publicar sitio en GitHub Pages
 
 on:
   push:
@@ -9,17 +8,20 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
   publicar:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
       - name: Descargar repositorio
@@ -28,11 +30,11 @@ jobs:
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Preparar archivos de la practica
+      - name: Preparar archivos del sitio
         uses: actions/upload-pages-artifact@v4
         with:
-          path: Practica01/Ejemplos
+          path: Practica01
 
-      - name: Publicar pagina web
+      - name: Publicar sitio
         id: deployment
         uses: actions/deploy-pages@v4
