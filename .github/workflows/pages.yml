@@ -34,7 +34,7 @@ jobs:
       - name: Preparar archivos del sitio
         uses: actions/upload-pages-artifact@v4
         with:
-          path: '.'
+          path: Practica01/Ejemplos
  
       - name: Deploy to GitHub Pages
         id: deployment
